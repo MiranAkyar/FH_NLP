@@ -2,7 +2,10 @@
   "entities": [
     {
       "id": "e1",
-      "type": "Kunde"
+      "type": "Kunde",
+      "attributes": [
+        "Lieferadresse"
+      ]
     },
     {
       "id": "e2",
@@ -10,15 +13,14 @@
     },
     {
       "id": "e3",
-      "type": "Produkt"
+      "type": "welcher"
     },
     {
-      "id": "e4",
-      "type": "Lieferadresse"
-    },
-    {
-      "id": "e5",
-      "type": "Beschreibung"
+      "id": "e6",
+      "type": "Beschreibung",
+      "attributes": [
+        "Produkt"
+      ]
     }
   ],
   "relations": [
@@ -32,39 +34,12 @@
       }
     },
     {
-      "subject": "e2",
-      "predicate": "enthalten",
-      "object": "e3",
-      "cardinality": {
-        "subject": "1",
-        "object": "n"
-      }
-    },
-    {
       "subject": "e3",
       "predicate": "enthalten",
       "object": "e2",
       "cardinality": {
-        "subject": "1",
+        "subject": "n",
         "object": "n"
-      }
-    },
-    {
-      "subject": "e1",
-      "predicate": "haben",
-      "object": "e4",
-      "cardinality": {
-        "subject": "1",
-        "object": "1"
-      }
-    },
-    {
-      "subject": "e3",
-      "predicate": "haben",
-      "object": "e5",
-      "cardinality": {
-        "subject": "1",
-        "object": "1"
       }
     }
   ]
