@@ -1,153 +1,26 @@
 {
   "entities": [
     {
+      "id": "e1",
+      "type": "Bestellung"
+    },
+    {
       "id": "e2",
-      "type": "Bauteil",
-      "attributes": [
-        "Bezeichnung"
-      ]
+      "type": "Produkt"
     },
     {
       "id": "e3",
-      "type": "Einkaufspreis"
+      "type": "Lieferadresse"
     },
     {
       "id": "e4",
-      "type": "Lager"
-    },
-    {
-      "id": "e5",
-      "type": "Gerät",
-      "attributes": [
-        "Gerät_Bezeichnung",
-        "Gerät_Bezeichnung",
-        "Gerät_Bezeichnung",
-        "Gerät_Bezeichnung"
-      ]
-    },
-    {
-      "id": "e8",
-      "type": "Gerätetyp",
-      "attributes": [
-        "Lagerbestand",
-        "Lagerbestand"
-      ]
-    },
-    {
-      "id": "e9",
-      "type": "Maschine"
-    },
-    {
-      "id": "e10",
       "type": "Kunde"
-    },
-    {
-      "id": "e11",
-      "type": "Kunde_Name",
-      "attributes": [
-        "Kunde_Adresse",
-        "Kunde_Adresse"
-      ]
-    },
-    {
-      "id": "e13",
-      "type": "Datenbank"
-    },
-    {
-      "id": "e14",
-      "type": "Nummer"
-    },
-    {
-      "id": "e15",
-      "type": "Bezeichnung"
-    },
-    {
-      "id": "e16",
-      "type": "Hersteller_Name"
-    },
-    {
-      "id": "e17",
-      "type": "Teil"
-    },
-    {
-      "id": "e18",
-      "type": "Stück"
-    },
-    {
-      "id": "e20",
-      "type": "Regelung"
-    },
-    {
-      "id": "e21",
-      "type": "Betrieb"
-    },
-    {
-      "id": "e22",
-      "type": "Eur"
-    },
-    {
-      "id": "e23",
-      "type": "Sonderkondition"
     }
   ],
   "relations": [
     {
-      "subject": "e3",
-      "predicate": "speichern",
-      "object": "e4",
-      "cardinality": {
-        "subject": "1",
-        "object": "1"
-      }
-    },
-    {
-      "subject": "e9",
-      "predicate": "gelten",
-      "object": "e10",
-      "cardinality": {
-        "subject": "n",
-        "object": "n"
-      }
-    },
-    {
-      "subject": "e2",
-      "predicate": "speichern",
-      "object": "e5",
-      "cardinality": {
-        "subject": "n",
-        "object": "n"
-      }
-    },
-    {
-      "subject": "e10",
-      "predicate": "speichern",
-      "object": "e5",
-      "cardinality": {
-        "subject": "n",
-        "object": "n"
-      }
-    },
-    {
-      "subject": "e10",
-      "predicate": "einräumen",
-      "object": "e13",
-      "cardinality": {
-        "subject": "n",
-        "object": "1"
-      }
-    },
-    {
-      "subject": "e2",
-      "predicate": "verwenden",
-      "object": "e14",
-      "cardinality": {
-        "subject": "1",
-        "object": "1"
-      }
-    },
-    {
-      "subject": "e2",
-      "predicate": "verwenden",
+      "subject": "e1",
+      "predicate": "enthalten",
       "object": "e2",
       "cardinality": {
         "subject": "1",
@@ -155,147 +28,12 @@
       }
     },
     {
-      "subject": "e15",
-      "predicate": "verwenden",
-      "object": "e14",
-      "cardinality": {
-        "subject": "1",
-        "object": "1"
-      }
-    },
-    {
-      "subject": "e15",
-      "predicate": "verwenden",
-      "object": "e2",
-      "cardinality": {
-        "subject": "1",
-        "object": "n"
-      }
-    },
-    {
-      "subject": "e16",
-      "predicate": "speichern",
-      "object": "e17",
-      "cardinality": {
-        "subject": "1",
-        "object": "1"
-      }
-    },
-    {
-      "subject": "e16",
-      "predicate": "speichern",
-      "object": "e18",
-      "cardinality": {
-        "subject": "1",
-        "object": "1"
-      }
-    },
-    {
-      "subject": "e16",
-      "predicate": "speichern",
+      "subject": "e3",
+      "predicate": "gehören",
       "object": "e4",
       "cardinality": {
         "subject": "1",
         "object": "1"
-      }
-    },
-    {
-      "subject": "e3",
-      "predicate": "speichern",
-      "object": "e17",
-      "cardinality": {
-        "subject": "1",
-        "object": "1"
-      }
-    },
-    {
-      "subject": "e3",
-      "predicate": "speichern",
-      "object": "e18",
-      "cardinality": {
-        "subject": "1",
-        "object": "1"
-      }
-    },
-    {
-      "subject": "e20",
-      "predicate": "gelten",
-      "object": "e21",
-      "cardinality": {
-        "subject": "1",
-        "object": "1"
-      }
-    },
-    {
-      "subject": "e20",
-      "predicate": "gelten",
-      "object": "e22",
-      "cardinality": {
-        "subject": "1",
-        "object": "n"
-      }
-    },
-    {
-      "subject": "e20",
-      "predicate": "gelten",
-      "object": "e10",
-      "cardinality": {
-        "subject": "1",
-        "object": "n"
-      }
-    },
-    {
-      "subject": "e9",
-      "predicate": "gelten",
-      "object": "e21",
-      "cardinality": {
-        "subject": "n",
-        "object": "1"
-      }
-    },
-    {
-      "subject": "e9",
-      "predicate": "gelten",
-      "object": "e22",
-      "cardinality": {
-        "subject": "n",
-        "object": "n"
-      }
-    },
-    {
-      "subject": "e2",
-      "predicate": "speichern",
-      "object": "e13",
-      "cardinality": {
-        "subject": "n",
-        "object": "1"
-      }
-    },
-    {
-      "subject": "e11",
-      "predicate": "speichern",
-      "object": "e10",
-      "cardinality": {
-        "subject": "1",
-        "object": "1"
-      }
-    },
-    {
-      "subject": "e10",
-      "predicate": "einräumen",
-      "object": "e5",
-      "cardinality": {
-        "subject": "n",
-        "object": "n"
-      }
-    },
-    {
-      "subject": "e10",
-      "predicate": "einräumen",
-      "object": "e23",
-      "cardinality": {
-        "subject": "n",
-        "object": "n"
       }
     }
   ]

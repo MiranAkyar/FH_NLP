@@ -1,0 +1,9 @@
+
+         Ein Kunde kann mehrere Bestellungen aufgeben . 
+         Eine Bestellung wird von genau einem Kunden aufgegeben . 
+         Eine Bestellung enthält mehrere Produkte . 
+         Ein Produkt ist in mehreren Bestellungen enthalten . 
+         Zu einem Kunden gehört genau eine Lieferadresse . 
+         Eine Lieferadresse gehört genau einem Kunden . 
+         Ein Produkt kann eine Beschreibung haben . 
+        
