@@ -1,0 +1,122 @@
+    prompt = f"""Du gruppierst Substantive aus einem Text.
+Gruppiere NUR echte Synonyme.
+
+Ist ein Wort allein mit seiner bedeutung, gruppiere es allein.
+
+Prüfe für jede mögliche Gruppe: Könnte man im Text das eine Wort durch das andere ersetzen ohne die Bedeutung zu ändern?
+Wenn ja, dann Gruppe bilden.
+Wenn nein, dann keine gruppe Bilden.
+
+Originaltext:
+{original_text}
+
+Substantive: {lemmas}
+
+Antworte NUR als JSON, ohne Erklärungen, ohne Markdown-Backticks:
+{{
+  "groups": [
+    {{"label": "Bauteil", "members": ["bauteil", "teil"]}}
+  ]
+}}"""
+
+
+# function declarations: synonym clustering 1
+
+HF_MODEL = "meta-llama/Llama-3.1-8B-Instruct:cerebras"  # HuggingFace Modell für Synonym-Clusterung
+
+client = OpenAI(
+    base_url="https://router.huggingface.co/v1",
+    api_key=HF_API_KEY
+)
+
+from itertools import combinations
+
+def are_synonyms(word_a, word_b, original_text):
+    prompt = f"""Originaltext: {original_text}
+
+Sind "{word_a}" und "{word_b}" in diesem Text Synonyme die man gegenseitig ersetzen kann?
+Antworte NUR mit: JA oder NEIN"""
+
+    completion = client.chat.completions.create(
+        model="meta-llama/Llama-3.1-8B-Instruct:cerebras",
+        messages=[{"role": "user", "content": prompt}],
+        max_tokens=5,
+        temperature=0.0
+    )
+    return completion.choices[0].message.content.strip().upper().startswith("JA")
+
+
+def cluster_synonyms_llm(noun_table, original_text):
+    lemmas = [k for k in noun_table.keys() if "_" not in k]
+    
+    # Alle Paare paarweise vergleichen
+    synonym_pairs = []
+    for word_a, word_b in combinations(lemmas, 2):
+        if are_synonyms(word_a, word_b, original_text):
+            synonym_pairs.append((word_a, word_b))
+            print(f"  Synonym: {word_a} ↔ {word_b}")
+    
+    # Paare zu Gruppen zusammenführen (Union-Find)
+    groups = {lemma: lemma for lemma in lemmas}  # jeder zeigt auf sich selbst
+    
+    def find(x):
+        while groups[x] != x:
+            x = groups[x]
+        return x
+    
+    def union(x, y):
+        groups[find(x)] = find(y)
+    
+    for word_a, word_b in synonym_pairs:
+        union(word_a, word_b)
+    
+    # Gruppen aufbauen
+    result = {}
+    for lemma in lemmas:
+        root = find(lemma)
+        if root not in result:
+            result[root] = []
+        result[root].append(lemma)
+    
+    return {
+        "groups": [
+            {"label": root.title(), "members": members}
+            for root, members in result.items()
+        ]
+    }
+
+def apply_synonym_clusters(noun_table, clusters):
+    """Merged Synonym-Einträge in der noun_table"""
+    result = dict(noun_table)
+    
+    for group in clusters["groups"]:
+        label = group["label"].lower()
+        members = group["members"]
+        
+        if len(members) <= 1:
+            continue
+        
+        # Alle Kontexte und Varianten zusammenführen
+        merged_contexts = []
+        merged_variants = set()
+        
+        for member in members:
+            if member in result:
+                merged_contexts += result[member]["contexts"]
+                merged_variants |= result[member]["variants"]
+        
+        # Neuen zusammengeführten Eintrag anlegen
+        result[label] = {
+            "id": result[members[0]]["id"] if members[0] in result else len(result),
+            "lemma": label,
+            "variants": merged_variants,
+            "contexts": merged_contexts,
+            "cluster_id": None
+        }
+        
+        # Alte Einträge entfernen
+        for member in members:
+            if member in result and member != label:
+                del result[member]
+    
+    return result

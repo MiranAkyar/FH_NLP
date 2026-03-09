@@ -2,38 +2,252 @@
   "entities": [
     {
       "id": "e1",
-      "type": "Bestellung"
-    },
-    {
-      "id": "e2",
-      "type": "Produkt"
-    },
-    {
-      "id": "e3",
-      "type": "Lieferadresse"
+      "type": "Bauteil",
+      "attributes": [
+        "Nummer",
+        "Fertigungsdatum"
+      ]
     },
     {
       "id": "e4",
+      "type": "Bezeichnung"
+    },
+    {
+      "id": "e5",
+      "type": "Hersteller_Name"
+    },
+    {
+      "id": "e6",
+      "type": "Stück"
+    },
+    {
+      "id": "e7",
+      "type": "Lager"
+    },
+    {
+      "id": "e8",
+      "type": "Preis"
+    },
+    {
+      "id": "e9",
+      "type": "Gerät",
+      "attributes": [
+        "Gerät_Bezeichnung"
+      ]
+    },
+    {
+      "id": "e11",
+      "type": "Datenbank"
+    },
+    {
+      "id": "e12",
+      "type": "Kunde_Name"
+    },
+    {
+      "id": "e13",
       "type": "Kunde"
+    },
+    {
+      "id": "e14",
+      "type": "Kunde_Adresse"
+    },
+    {
+      "id": "e15",
+      "type": "Branche"
+    },
+    {
+      "id": "e16",
+      "type": "Sonderkondition"
     }
   ],
   "relations": [
     {
       "subject": "e1",
-      "predicate": "enthalten",
-      "object": "e2",
+      "predicate": "haben",
+      "object": "e4",
+      "cardinality": {
+        "subject": "1_fallback",
+        "object": "1"
+      }
+    },
+    {
+      "subject": "e4",
+      "predicate": "sein",
+      "object": "e1",
       "cardinality": {
         "subject": "1",
         "object": "n"
       }
     },
     {
-      "subject": "e3",
-      "predicate": "gehören",
-      "object": "e4",
+      "subject": "e5",
+      "predicate": "speichern",
+      "object": "e1",
       "cardinality": {
-        "subject": "1",
-        "object": "1"
+        "subject": "1_fallback",
+        "object": "1_fallback"
+      }
+    },
+    {
+      "subject": "e5",
+      "predicate": "speichern",
+      "object": "e6",
+      "cardinality": {
+        "subject": "1_fallback",
+        "object": "1_fallback"
+      }
+    },
+    {
+      "subject": "e5",
+      "predicate": "speichern",
+      "object": "e7",
+      "cardinality": {
+        "subject": "1_fallback",
+        "object": "1_fallback"
+      }
+    },
+    {
+      "subject": "e8",
+      "predicate": "speichern",
+      "object": "e1",
+      "cardinality": {
+        "subject": "1_fallback",
+        "object": "1_fallback"
+      }
+    },
+    {
+      "subject": "e8",
+      "predicate": "speichern",
+      "object": "e6",
+      "cardinality": {
+        "subject": "1_fallback",
+        "object": "1_fallback"
+      }
+    },
+    {
+      "subject": "e8",
+      "predicate": "speichern",
+      "object": "e7",
+      "cardinality": {
+        "subject": "1_fallback",
+        "object": "1_fallback"
+      }
+    },
+    {
+      "subject": "e7",
+      "predicate": "speichern",
+      "object": "e1",
+      "cardinality": {
+        "subject": "1_fallback",
+        "object": "1_fallback"
+      }
+    },
+    {
+      "subject": "e7",
+      "predicate": "speichern",
+      "object": "e6",
+      "cardinality": {
+        "subject": "1_fallback",
+        "object": "1_fallback"
+      }
+    },
+    {
+      "subject": "e7",
+      "predicate": "speichern",
+      "object": "e7",
+      "cardinality": {
+        "subject": "1_fallback",
+        "object": "1_fallback"
+      }
+    },
+    {
+      "subject": "e7",
+      "predicate": "speichern",
+      "object": "e9",
+      "cardinality": {
+        "subject": "1_fallback",
+        "object": "1_fallback"
+      }
+    },
+    {
+      "subject": "e1",
+      "predicate": "benötigen",
+      "object": "e11",
+      "cardinality": {
+        "subject": "n",
+        "object": "1_fallback"
+      }
+    },
+    {
+      "subject": "e1",
+      "predicate": "benötigen",
+      "object": "e9",
+      "cardinality": {
+        "subject": "n",
+        "object": "n"
+      }
+    },
+    {
+      "subject": "e12",
+      "predicate": "speichern",
+      "object": "e13",
+      "cardinality": {
+        "subject": "1_fallback",
+        "object": "1_fallback"
+      }
+    },
+    {
+      "subject": "e12",
+      "predicate": "speichern",
+      "object": "e14",
+      "cardinality": {
+        "subject": "1_fallback",
+        "object": "1_fallback"
+      }
+    },
+    {
+      "subject": "e12",
+      "predicate": "speichern",
+      "object": "e15",
+      "cardinality": {
+        "subject": "1_fallback",
+        "object": "1_fallback"
+      }
+    },
+    {
+      "subject": "e13",
+      "predicate": "beliefern",
+      "object": "e9",
+      "cardinality": {
+        "subject": "n",
+        "object": "n"
+      }
+    },
+    {
+      "subject": "e13",
+      "predicate": "sein",
+      "object": "e9",
+      "cardinality": {
+        "subject": "n",
+        "object": "n"
+      }
+    },
+    {
+      "subject": "e13",
+      "predicate": "sein",
+      "object": "e16",
+      "cardinality": {
+        "subject": "n",
+        "object": "n"
+      }
+    },
+    {
+      "subject": "e13",
+      "predicate": "sein",
+      "object": "e11",
+      "cardinality": {
+        "subject": "n",
+        "object": "1_fallback"
       }
     }
   ]

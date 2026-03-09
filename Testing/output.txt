@@ -1,9 +1,16 @@
-
-         Ein Kunde kann mehrere Bestellungen aufgeben . 
-         Eine Bestellung wird von genau einem Kunden aufgegeben . 
-         Eine Bestellung enthält mehrere Produkte . 
-         Ein Produkt ist in mehreren Bestellungen enthalten . 
-         Zu einem Kunden gehört genau eine Lieferadresse . 
-         Eine Lieferadresse gehört genau einem Kunden . 
-         Ein Produkt kann eine Beschreibung haben . 
-        
+Jedes Bauteil , das verwendet wird , hat eine eindeutige Nummer , ein Fertigungsdatum und eine 
+ Bezeichnung , die allerdings für mehrere verschiedene Bauteile gleich sein kann . 
+ Von jedem Teil werden außerdem der Hersteller_Name des Herstellers , der Einkaufspreis 
+ pro Stück und der am Lager vorhandene Vorrat gespeichert . Jedes 
+ herzustellende Gerät hat eine eindeutige Gerät_Bezeichnung . Auch von jedem schon 
+ gefertigten Gerätetyp soll der aktuelle Lagerbestand gespeichert werden , ebenso 
+ wie der Verkaufspreis des Gerätetyp_Gerätes . In der Datenbank ist ebenfalls zu 
+ speichern , welche Bauteile für welche Geräte benötigt werden . Es gibt Bauteile , 
+ die für mehrere Geräte verwendet werden . Von jedem Kunden werden der 
+ Kunde_Name , die Kunde_Adresse und die Branche gespeichert . Es kann verschiedene Kunden 
+ mit demselben Namen oder derselben Adresse geben . Außerdem ist zu jedem 
+ Kunden vermerkt , wer aus unserer Firma für die entsprechende 
+ Kundenbetreuung zuständig ist . Natürlich ist auch zu speichern , welche Kunden 
+ mit welchen Geräten beliefert werden . Es kann sein , dass gewissen Kunden für 
+ bestimmte Geräte Sonderkonditionen eingeräumt worden sind , dies soll ggf. 
+ ebenfalls in der Datenbank vermerkt werden .
