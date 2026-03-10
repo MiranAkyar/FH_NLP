@@ -1,13 +1,26 @@
 # ERM-Extraktion aus Text
 ### Regelbasierte Analyse mit LLM-Normalisierung
 
-Dieses Projekt extrahiert automatisch Entity-Relationship-Modelle (ERM) aus deutschsprachigem Fließtext. Die Verarbeitung erfolgt über eine mehrstufige Pipeline aus linguistischer Analyse, Homonym-Auflösung, Synonym-Clustering und regelbasierter Relationsextraktion.
+Dieses Projekt extrahiert automatisch Entity-Relationship-Modelle (ERM) aus deutschsprachigem Fließtext. Die Verarbeitung erfolgt über eine mehrstufige Pipeline aus linguistischer Analyse, Homonym-Auflösung, Synonym-Clustering und regelbasierter Relationsextraktion. Eine React-Webanwendung ermöglicht die interaktive Nutzung über den Browser.
+
+---
+
+## Projektstruktur
+
+```
+FH_NLP/
+├── Testing/
+│   └── code.ipynb       # Pipeline-Implementierung & API
+└── er-app/
+    └── src/             # React Web-UI
+```
 
 ---
 
 ## Voraussetzungen
 
 - Python 3.10+
+- Node.js & npm
 - [Ollama](https://ollama.com) (lokal installiert)
 - Internetverbindung beim ersten Start (für automatischen GBERT-Download)
 
@@ -18,8 +31,8 @@ Dieses Projekt extrahiert automatisch Entity-Relationship-Modelle (ERM) aus deut
 ### 1. Repository klonen
 
 ```bash
-git clone <[repo-url](https://github.com/MiranAkyar/FH_NLP.git)>
-cd <FH_NLP/Testing>
+git clone https://github.com/MiranAkyar/FH_NLP.git
+cd FH_NLP
 ```
 
 ### 2. Python-Abhängigkeiten installieren
@@ -44,26 +57,42 @@ Anschließend das benötigte Modell laden:
 ollama pull llama3.1:8b
 ```
 
-Ollama muss im Hintergrund laufen, bevor das Skript gestartet wird:
+### 5. Frontend-Abhängigkeiten installieren
 
 ```bash
-ollama serve
+cd er-app
+npm install
 ```
 
 ---
 
 ## Starten
 
+### Backend (REST-API)
+
+Ollama muss im Hintergrund laufen:
+
 ```bash
-python code.ipynb
+ollama serve
 ```
 
-Beim ersten Start wird das GBERT-Modell (`deepset/gbert-base`) automatisch über Hugging Face heruntergeladen. Dies kann einige Minuten dauern.
+Anschließend das Notebook `Testing/code.ipynb` vollständig ausführen. Beim ersten Start wird das GBERT-Modell (`deepset/gbert-base`) automatisch heruntergeladen — dies kann einige Minuten dauern.
 
-Die REST-API ist anschließend erreichbar unter:
-
+Die API ist anschließend erreichbar unter:
 ```
 http://localhost:8000
+```
+
+### Frontend (React Web-UI)
+
+```bash
+cd er-app
+npm start
+```
+
+Die Web-UI öffnet sich automatisch im Browser unter:
+```
+http://localhost:3000
 ```
 
 ---
@@ -87,16 +116,6 @@ Extrahiert ein ERM aus dem übergebenen Text.
   "entities": [...],
   "relations": [...]
 }
-```
-
----
-
-## Projektstruktur
-
-```
-├── main.py              # Einstiegspunkt, Pipeline & API
-├── requirements.txt     # Python-Abhängigkeiten
-└── README.md
 ```
 
 ---
