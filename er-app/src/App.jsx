@@ -30,13 +30,20 @@ function Arrow({ from, to, label, cardFrom, cardTo, nodes }) {
   const ly = my + Math.cos(angle) * 18;
   const len = Math.sqrt((dx - sx) ** 2 + (dy - sy) ** 2) || 1;
   const ux = (dx - sx) / len, uy = (dy - sy) / len;
+
+  // Direction-aware offset: up=50, down=40+attrs, horizontal=90
+  const srcAttrCount = src.attributes?.length ?? 0;
+  const dstAttrCount = dst.attributes?.length ?? 0;
+  const offFrom = uy < -0.5 ? 50 : uy > 0.5 ? 60 + srcAttrCount * 22 : 90;
+  const offTo   = uy < -0.5 ? 50 : uy > 0.5 ? 60 + dstAttrCount * 22 : 90;
+
   return (
     <g>
       <line x1={sx} y1={sy} x2={dx} y2={dy} stroke="#4a9eff" strokeWidth="1.5" strokeOpacity="0.6" markerEnd="url(#arrow)" />
       <rect x={lx - 32} y={ly - 11} width={64} height={22} rx={4} fill="#0f1923" stroke="#4a9eff" strokeWidth="1" strokeOpacity="0.5" />
       <text x={lx} y={ly + 4} textAnchor="middle" fill="#a0cfff" fontSize="10" fontFamily="'JetBrains Mono', monospace">{label}</text>
-      <text x={sx + ux * 22} y={sy + uy * 22 - 8} textAnchor="middle" fill="#ff9f4a" fontSize="11" fontWeight="bold" fontFamily="'JetBrains Mono', monospace">{formatCard(cardFrom)}</text>
-      <text x={dx - ux * 22} y={dy - uy * 22 - 8} textAnchor="middle" fill="#ff9f4a" fontSize="11" fontWeight="bold" fontFamily="'JetBrains Mono', monospace">{formatCard(cardTo)}</text>
+      <text x={sx + ux * offFrom} y={sy + uy * offFrom - 8} textAnchor="middle" fill="#ff9f4a" fontSize="11" fontWeight="bold" fontFamily="'JetBrains Mono', monospace">{formatCard(cardFrom)}</text>
+      <text x={dx - ux * offTo}   y={dy - uy * offTo   - 8} textAnchor="middle" fill="#ff9f4a" fontSize="11" fontWeight="bold" fontFamily="'JetBrains Mono', monospace">{formatCard(cardTo)}</text>
     </g>
   );
 }
@@ -268,7 +275,7 @@ export default function ERPipelineApp() {
           </div>
           <div style={{ fontSize: 11, color: '#7ab8e0', marginBottom: 5, fontWeight: 600 }}>Homonym Resolution</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
-            {[["none","Keine"],["rule-based","Rule-based"],["llm-based","LLM-based"],["full","Full"]].map(([val, lbl]) => (
+            {[["none","Keine"],["rule-based","Rule-based"],["context_embedding","Context Embedding"],["full","Full"]].map(([val, lbl]) => (
               <label key={val} onClick={() => setHomonymMode(val)} style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: 12, color: homonymMode === val ? '#c8e0f0' : '#4a7090' }}>
                 <span style={{ width: 13, height: 13, borderRadius: '50%', flexShrink: 0, border: '2px solid ' + (homonymMode === val ? '#4a9eff' : '#2a5080'), background: homonymMode === val ? '#4a9eff' : 'transparent', display: 'inline-block' }} />
                 {lbl}
