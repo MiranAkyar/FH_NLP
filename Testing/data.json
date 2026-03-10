@@ -4,8 +4,8 @@
       "id": "e1",
       "type": "Bauteil",
       "attributes": [
-        "Nummer",
-        "Fertigungsdatum"
+        "Fertigungsdatum",
+        "Nummer"
       ]
     },
     {
