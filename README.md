@@ -19,7 +19,7 @@ Dieses Projekt extrahiert automatisch Entity-Relationship-Modelle (ERM) aus deut
 
 ```bash
 git clone <[repo-url](https://github.com/MiranAkyar/FH_NLP.git)>
-cd <FH_NLP>
+cd <FH_NLP/Testing>
 ```
 
 ### 2. Python-Abhängigkeiten installieren
